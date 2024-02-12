@@ -17,7 +17,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -71,7 +70,7 @@ public class LoginTabFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(getActivity(), HomePage.class);
+                                Intent intent = new Intent(getActivity(), Accommodation_List.class);
                                 startActivity(intent);
                             }  else {
                                 Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
