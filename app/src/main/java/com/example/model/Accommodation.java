@@ -7,7 +7,7 @@ import android.os.Parcelable;
 public class Accommodation implements Parcelable {
 
     private PersonalInfo personalInfo;
-  //  private Room roomInfo;
+    private Room roomInfo;
 
     private int imageResource;
 
@@ -31,6 +31,14 @@ public class Accommodation implements Parcelable {
 
 
 
+
+    public Room getRoomInfo() {
+        return roomInfo;
+    }
+
+    public void setRoomInfo(Room roomInfo) {
+        this.roomInfo = roomInfo;
+    }
 
     private String name;
     private String description;
