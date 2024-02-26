@@ -33,7 +33,7 @@ public class Room_Info extends AppCompatActivity {
     private EditText checkoutDateEditText;
     private Calendar checkinCalendar;
     private Calendar checkoutCalendar;
-    private SimpleDateFormat dateFormat;
+    private SimpleDateFormat dateFormat; //sivatejaa.thangala@gmail.com
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

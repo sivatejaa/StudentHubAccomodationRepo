@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Student Hub</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="type">
+        <item>Select</item>
+        <item>Single BedRoom</item>
+        <item>Double BedRoom</item>
+        <item>Deluxe BedRoom</item>
+        <item>Super  Deluxe BedRoom</item>
+    </string-array>
 </resources>

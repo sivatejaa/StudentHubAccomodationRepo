@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.model.Accommodation;
+import com.example.model.PersonalInfo;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -38,7 +40,7 @@ public class Personal_Info extends AppCompatActivity {
         Button button = findViewById(R.id.button);
 
         Intent intent = getIntent();
-        Accommodation accommodation = intent.getParcelableExtra("hotelObject");
+        Accommodation hotel = intent.getParcelableExtra("hotelObject");
 
 
 
@@ -65,7 +67,7 @@ public class Personal_Info extends AppCompatActivity {
                             })
                             .show();
                 }else{
-                  /*  Intent roomInfoIntent = new Intent(Personal_Info.this, Room_Info.class);
+                    Intent roomInfoIntent = new Intent(Personal_Info.this, Room_Info.class);
 
                     roomInfoIntent.putExtra("hotelObject", hotel);
                     PersonalInfo personalInfo=new PersonalInfo(name,email,address,phone);
@@ -73,7 +75,7 @@ public class Personal_Info extends AppCompatActivity {
                     roomInfoIntent.putExtra("personalInfo", personalInfo);
 
                     Log.d("hotel.getName()", hotel.getName());
-                    startActivity(roomInfoIntent);*/
+                    startActivity(roomInfoIntent);
                 }
 
 
