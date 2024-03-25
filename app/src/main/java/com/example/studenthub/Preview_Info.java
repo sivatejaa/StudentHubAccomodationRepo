@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.model.Accommodation;
 import com.example.model.PersonalInfo;
 import com.example.model.Room;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,7 +55,7 @@ public class Preview_Info extends AppCompatActivity {
         TextView textViewRoomType = findViewById(R.id.textViewRoomType);
         TextView textViewCheckin = findViewById(R.id.textViewCheckinDate);
         TextView textViewCheckout = findViewById(R.id.textViewCheckoutDate);
-        TextView textViewNoofRoom = findViewById(R.id.noOfRooms);
+       // TextView textViewNoofRoom = findViewById(R.id.noOfRooms);
 
         String confirmationNumber = generateConfirmationNumber();
 
@@ -73,8 +76,8 @@ public class Preview_Info extends AppCompatActivity {
             textViewRoomType.setText(room.getSelectedRoomType());
             textViewCheckin.setText(room.getCheckinDate());
             textViewCheckout.setText(room.getCheckoutDate());
-            textViewNoofRoom.setText(room.getNumberOfRooms());
-            textViewPrice.setText("$ "+String.valueOf(price)+" Pay at Hotel");
+           // textViewNoofRoom.setText(room.getNumberOfRooms());
+            textViewPrice.setText("$ "+String.valueOf(price));
         }
 
 
@@ -85,7 +88,7 @@ public class Preview_Info extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    Intent intent = new Intent(Preview_Info.this, null);
+                    Intent intent = new Intent(Preview_Info.this, Confirmation.class);
 
                     hotel.setConfirmationNumber(confirmationNumber);
                     hotel.setRoomInfo(room);
@@ -111,10 +114,51 @@ public class Preview_Info extends AppCompatActivity {
         });
     }
 
-  private void saveBookingToDatabase(Accommodation hotel) {
+    private void saveBookingToDatabase(Accommodation hotel) {
 
-        String bookingId = bookingsDatabase.push().getKey();
-        bookingsDatabase.child(bookingId).setValue(hotel);
+        String confirmationNumber = hotel.getConfirmationNumber();
+
+        // Set the DatabaseReference to the node using the confirmation number
+        DatabaseReference bookingRef = bookingsDatabase.child(confirmationNumber);
+
+
+        DatabaseReference apartmentsRef = FirebaseDatabase.getInstance().getReference("Accommodation/apartments");
+
+
+        apartmentsRef.child(hotel.getRoomInfo().getSelectedRoomType()).setValue("Not available").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Value updated successfully
+                Log.d("TAG", "Value updated successfully");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Failed to update value
+                Log.e("TAG", "Failed to update value", e);
+            }
+        });
+
+
+        // Set the values for the booking under the specified node
+        bookingRef.setValue(hotel)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Data successfully inserted
+                        Log.d("Firebase", "Data inserted successfully with confirmation number: " + confirmationNumber);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle any errors
+                        Log.e("Firebase", "Error inserting data: " + e.getMessage());
+                    }
+                });
+        //bookingsDatabase.child(hotel.getConfirmationNumber());
+        //String bookingId = bookingsDatabase.push().getKey();
+        // bookingsDatabase.child(bookingId).setValue(hotel);
     }
 
     private void logoutUser() {

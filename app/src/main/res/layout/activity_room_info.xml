@@ -18,11 +18,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="196dp"
-            android:layout_height="56dp"
+            android:layout_width="82dp"
+            android:layout_height="48dp"
             android:layout_gravity="left"
 
-            app:srcCompat="@drawable/stayeasycropped" />
+            app:srcCompat="@drawable/logopng" />
 
         <TextView
             android:id="@+id/logoutId"
@@ -54,19 +54,21 @@
         android:textAlignment="center"
         android:background="@android:drawable/btn_dropdown"/>
 
-    <EditText
-        android:id="@+id/textViewRooms"
+    <Spinner
+        android:id="@+id/spinnerType1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Please Enter Number of Rooms(Eg: 1,2)"
-        android:layout_marginTop="10dp"
-        />
+        android:entries="@array/type2"
+        android:textAlignment="center"
+        android:background="@android:drawable/btn_dropdown"/>
+
+
 
     <EditText
         android:id="@+id/textViewCheckin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Please Select CheckIn Date(MM/DD/YYYY)"
+        android:hint="Please Select Lease start Date(MM/DD/YYYY)"
         android:layout_marginTop="10dp"
         />
 
@@ -74,7 +76,7 @@
         android:id="@+id/textViewCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Please Select CheckOut Date(MM/DD/YYYY)"
+        android:hint="Please Select Lease end Date(MM/DD/YYYY)"
         android:layout_marginTop="20dp"
         />
 
@@ -82,7 +84,7 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Checkin"
+        android:text="Next"
         android:layout_marginTop="20dp"/>
 
 

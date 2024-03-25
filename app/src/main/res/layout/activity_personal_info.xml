@@ -94,7 +94,7 @@
 
         android:drawablePadding="8dp"
         android:background="@drawable/edittext_bkg"
-        android:hint="Please Enter Address"/>
+        android:hint="Please enter current Address"/>
 
     <Button
         android:id="@+id/button"

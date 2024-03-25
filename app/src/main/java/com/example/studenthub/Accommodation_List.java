@@ -36,9 +36,9 @@ public class Accommodation_List extends AppCompatActivity {
                 logoutUser();
             }
         });
-        accommodations.add(new Accommodation( R.drawable.motel5,"Holiday Inn  (Price Starting from $100)", "5 Hotel Chains with Two-Bedroom Suites You Can Book."));
-        accommodations.add(new Accommodation(R.drawable.motel_2,"Haytt (Price Starting from $90)", "2 bed 1 bath Super Deluxe Hotel 2 Star Hotel"));
-        accommodations.add(new Accommodation(R.drawable.motel_4,"The Plaza (Price Starting from $110)", "3 bed 1 bath Hotel 3 Star Hotel with a wide range of Facilities" ));
+        accommodations.add(new Accommodation( R.drawable.forest_cove_apt,"Forest Cove Apartments", "5 Hotel Chains with Two-Bedroom Suites You Can Book."));
+        accommodations.add(new Accommodation(R.drawable.university_point_apt,"University Point", "2 bed 1 bath Super Deluxe Hotel 2 Star Hotel"));
+        accommodations.add(new Accommodation(R.drawable.horizons_apt,"Horizons Apartments", "3 bed 1 bath Hotel 3 Star Hotel with a wide range of Facilities" ));
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

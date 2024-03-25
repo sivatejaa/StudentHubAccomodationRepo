@@ -14,10 +14,17 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.adapters.CustomSpinnerAdapter;
 import com.example.model.Accommodation;
 import com.example.model.PersonalInfo;
 import com.example.model.Room;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.text.ParseException;
@@ -25,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class Room_Info extends AppCompatActivity {
@@ -45,6 +53,35 @@ public class Room_Info extends AppCompatActivity {
         checkoutCalendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
+        Spinner roomTypeSpinner = findViewById(R.id.spinnerType);
+        Spinner lease_term = findViewById(R.id.spinnerType1);
+        String[] types = getResources().getStringArray(R.array.type);
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roomTypeSpinner.setAdapter(adapter);
+        // Disable the dropdown items that are not available
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Accommodation/apartments");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String apartmentName = snapshot.getKey();
+                    String availability = snapshot.getValue(String.class);
+                    // Here you can process the data as needed
+                    if (!availability.equals("Available")) {
+                        // Disable the dropdown item if it's not available
+                        adapter.disableItemByValue(apartmentName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle any errors here
+            }
+        });
+
         TextView logoutTextView = findViewById(R.id.logoutId);
         logoutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +91,8 @@ public class Room_Info extends AppCompatActivity {
             }
         });
 
-        final Spinner roomTypeSpinner = findViewById(R.id.spinnerType);
-        final EditText numberOfRoomsEditText = findViewById(R.id.textViewRooms);
+        //final Spinner roomTypeSpinner = findViewById(R.id.spinnerType);
+      //  final EditText numberOfRoomsEditText = findViewById(R.id.textViewRooms);
         checkinDateEditText = findViewById(R.id.textViewCheckin);
         checkoutDateEditText = findViewById(R.id.textViewCheckout);
 
@@ -81,26 +118,27 @@ public class Room_Info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String selectedRoomType = roomTypeSpinner.getSelectedItem().toString();
-                String numberOfRooms = numberOfRoomsEditText.getText().toString().trim();
+               String leaseTerm = lease_term.getSelectedItem().toString().trim();
                 String checkinDate = checkinDateEditText.getText().toString().trim();
                 String checkoutDate = checkoutDateEditText.getText().toString().trim();
 
-                if (selectedRoomType.equals("Select") || numberOfRooms.isEmpty() || checkinDate.isEmpty() || checkoutDate.isEmpty()) {
+                if (selectedRoomType.equals("Select") ||  checkinDate.isEmpty() || checkoutDate.isEmpty()) {
                     if (selectedRoomType.equals("Select")) {
                         showErrorDialog("Please select a room type.");
                     } else {
                         showErrorDialog("Please enter all the fields.");
                     }
                 } else {
-                    Intent intent = new Intent(Room_Info.this, null);
+                    Intent intent = new Intent(Room_Info.this, Preview_Info.class);
 
                     hotel.setSelectedRoomType(selectedRoomType);
                     hotel.setCheckinDate(checkinDate);
-                    hotel.setNumberOfRooms(numberOfRooms);
+                   // hotel.setNumberOfRooms(numberOfRooms);
                     hotel.setCheckoutDate(checkoutDate);
 
-                    Room room = new Room(selectedRoomType, numberOfRooms, checkinDate, checkoutDate);
-                    double roomPrice = calculatePrice(hotel);
+                    Room room = new Room(selectedRoomType, leaseTerm, checkinDate, checkoutDate);
+                    double roomPrice = 100.0;
+                            //calculatePrice(hotel);
                     hotel.setPrice(roomPrice);
 
                     intent.putExtra("hotelObject", hotel);

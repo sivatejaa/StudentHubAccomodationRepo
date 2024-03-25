@@ -17,10 +17,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="196dp"
-            android:layout_height="56dp"
+            android:layout_width="82dp"
+            android:layout_height="48dp"
             android:layout_gravity="left"
-            app:srcCompat="@drawable/stayeasycropped" />
+
+            app:srcCompat="@drawable/logopng" />
         <TextView
             android:id="@+id/logoutId"
             android:layout_width="343dp"
@@ -59,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name: "
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -75,6 +77,34 @@
             tools:layout_editor_absoluteY="164dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="start">
+
+        <TextView
+            android:id="@+id/RoomType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apartment No: "
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="525dp" />
+
+        <TextView
+            android:id="@+id/textViewRoomType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Room Type"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="525dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,6 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email: "
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -117,6 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone: "
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -145,6 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Address: "
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -161,33 +194,7 @@
             tools:layout_editor_absoluteY="525dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:gravity="start">
 
-        <TextView
-            android:id="@+id/RoomType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Room Type: "
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="525dp" />
-
-        <TextView
-            android:id="@+id/textViewRoomType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Room Type"
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="525dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -200,8 +207,9 @@
             android:id="@+id/CheckinDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Checkin Date: "
+            android:text="Lease start Date: "
             android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="525dp" />
@@ -227,7 +235,8 @@
             android:id="@+id/CheckoutDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Checkout Date: "
+            android:text="Lease end Date: "
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -237,40 +246,15 @@
             android:id="@+id/textViewCheckoutDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Number of Rooms:"
+            android:text=" "
+
             android:textSize="20dp"
             android:layout_gravity="center_vertical"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="525dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:gravity="start">
 
-        <TextView
-            android:id="@+id/NoofRooms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No of Rooms: "
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="525dp" />
-
-        <TextView
-            android:id="@+id/noOfRooms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NofR:"
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="525dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -283,7 +267,7 @@
             android:id="@+id/textViewPrice2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price : "
+            android:text=" Price : "
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
@@ -294,7 +278,7 @@
             android:id="@+id/textViewPrice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NofR:"
+            android:text="NofR"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
