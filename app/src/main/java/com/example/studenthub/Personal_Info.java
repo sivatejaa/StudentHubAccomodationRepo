@@ -38,27 +38,10 @@ public class Personal_Info extends AppCompatActivity {
                 logoutUser();
             }
         });
-        EditText nameEditText= findViewById(R.id.edName);
-        EditText emailEditText= findViewById(R.id.edEmail);
-       /* emailEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        EditText nameEditText = findViewById(R.id.edName);
+        EditText emailEditText = findViewById(R.id.edEmail);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!isValidEmail(s.toString())) {
-                    emailEditText.setError("Invalid email address");
-                } else {
-                    emailEditText.setError(null);
-                }
-            }
-        });*/
-        EditText phoneEditText= findViewById(R.id.edPhone);
+        EditText phoneEditText = findViewById(R.id.edPhone);
         phoneEditText.addTextChangedListener(new TextWatcher() {
             private boolean isFormatting;
             private boolean deletingHyphen;
@@ -120,13 +103,11 @@ public class Personal_Info extends AppCompatActivity {
                 }
             }
         });
-        EditText addressEditText= findViewById(R.id.editTexAddress);
+        EditText addressEditText = findViewById(R.id.editTexAddress);
         Button button = findViewById(R.id.button);
 
         Intent intent = getIntent();
         Accommodation hotel = intent.getParcelableExtra("hotelObject");
-
-
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -151,21 +132,20 @@ public class Personal_Info extends AppCompatActivity {
                                 }
                             })
                             .show();
-                }if (!isValidEmail(email)) {
+                }
+                if (!isValidEmail(email)) {
                     emailEditText.setError("Invalid email address");
-                } else{
+                } else {
                     Intent roomInfoIntent = new Intent(Personal_Info.this, Room_Info.class);
 
                     roomInfoIntent.putExtra("hotelObject", hotel);
-                    PersonalInfo personalInfo=new PersonalInfo(name,email,address,phone);
+                    PersonalInfo personalInfo = new PersonalInfo(name, email, address, phone);
 
                     roomInfoIntent.putExtra("personalInfo", personalInfo);
 
                     Log.d("hotel.getName()", hotel.getName());
                     startActivity(roomInfoIntent);
                 }
-
-
 
 
             }
@@ -181,6 +161,7 @@ public class Personal_Info extends AppCompatActivity {
 
         return matcher.matches();
     }
+
     private void logoutUser() {
 
         FirebaseAuth.getInstance().signOut();

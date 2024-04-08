@@ -47,5 +47,19 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.4.0")
     annotationProcessor ("androidx.room:room-compiler:2.4.0")
     implementation ("com.sun.mail:javax.mail:1.6.2")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.intuit.sdp:sdp-android:1.1.0")
+
+
+
+
+
+
+
+
+
+
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 
 }

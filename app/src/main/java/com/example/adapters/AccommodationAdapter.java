@@ -42,10 +42,9 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         final Accommodation accommodation = accommodations.get(position);
-
         holder.hotelName.setText(accommodation.getName());
-
         holder.hotelImage.setImageResource(accommodation.getImageResource());
 
         Button bookNowButton = holder.itemView.findViewById(R.id.bookNowButton); // Find the button within the item
@@ -53,22 +52,16 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Personal_Info.class);
-
-
                 intent.putExtra("hotelObject", accommodation);
-
                 context.startActivity(intent);
             }
         });
     }
 
     private void saveBookingToDatabase(Accommodation accommodation) {
-
         String bookingId = bookingsDatabase.push().getKey();
         bookingsDatabase.child(bookingId).setValue(accommodation);
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -78,8 +71,6 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView hotelImage;
         private TextView hotelName;
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             hotelImage = itemView.findViewById(R.id.hotelImage);

@@ -36,10 +36,7 @@ public class SignUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_sign_up_fragment, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        //usersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-
-
-        sidEditText=view.findViewById(R.id.signup_sid);
+        sidEditText = view.findViewById(R.id.signup_sid);
         emailEditText = view.findViewById(R.id.signup_email);
         passwordEditText = view.findViewById(R.id.signup_password);
         signUpButton = view.findViewById(R.id.signup_button);

@@ -12,7 +12,6 @@ import java.util.Map;
 public class CustomSpinnerAdapter extends ArrayAdapter<String>{
 
     private Map<String, Boolean> enabledItemsMap;
-
     public CustomSpinnerAdapter(Context context, int resource, String[] items) {
         super(context, resource, items);
         enabledItemsMap = new HashMap<>();

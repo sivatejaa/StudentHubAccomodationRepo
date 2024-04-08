@@ -8,8 +8,29 @@ public class Accommodation implements Parcelable {
 
     private PersonalInfo personalInfo;
     private Room roomInfo;
-
     private int imageResource;
+
+    private String uidNo;
+    private String confirmationNumber;
+
+    private String decisionStatus;
+    private String name;
+    private String description;
+
+    private String selectedRoomType;
+    private String numberOfRooms;
+    private String checkinDate;
+    private String checkoutDate;
+
+
+    public String getUidNo() {
+        return uidNo;
+    }
+
+    public void setUidNo(String uidNo) {
+        this.uidNo = uidNo;
+    }
+
 
     public PersonalInfo getPersonalInfo() {
         return personalInfo;
@@ -27,10 +48,6 @@ public class Accommodation implements Parcelable {
         this.confirmationNumber = confirmationNumber;
     }
 
-    private String confirmationNumber;
-
-
-
 
     public Room getRoomInfo() {
         return roomInfo;
@@ -40,13 +57,17 @@ public class Accommodation implements Parcelable {
         this.roomInfo = roomInfo;
     }
 
-    private String name;
-    private String description;
-
-    private String selectedRoomType ;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDecisionStatus() {
+        return decisionStatus;
+    }
+
+    public void setDecisionStatus(String decisionStatus) {
+        this.decisionStatus = decisionStatus;
     }
 
     public void setDescription(String description) {
@@ -93,15 +114,27 @@ public class Accommodation implements Parcelable {
         this.price = price;
     }
 
-    private String numberOfRooms ;
-    private  String checkinDate;
-    private String checkoutDate ;
 
     public void setImageResource(int imageResource) {
         this.imageResource = imageResource;
     }
 
     private double price;
+
+    public Accommodation(PersonalInfo personalInfo, Room roomInfo, int imageResource, String confirmationNumber, String decisionStatus, String name, String description, String selectedRoomType, String numberOfRooms, String checkinDate, String checkoutDate, double price) {
+        this.personalInfo = personalInfo;
+        this.roomInfo = roomInfo;
+        this.imageResource = imageResource;
+        this.confirmationNumber = confirmationNumber;
+        this.decisionStatus = decisionStatus;
+        this.name = name;
+        this.description = description;
+        this.selectedRoomType = selectedRoomType;
+        this.numberOfRooms = numberOfRooms;
+        this.checkinDate = checkinDate;
+        this.checkoutDate = checkoutDate;
+        this.price = price;
+    }
 
     public Accommodation(int imageResource, String name, String description) {
         this.imageResource = imageResource;

@@ -14,6 +14,18 @@
         android:theme="@style/Theme.StudentHub"
         tools:targetApi="31">
         <activity
+            android:name="com.example.chat.UsersActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.admin.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".Accommodation_List"
             android:exported="false" />
         <activity
@@ -25,15 +37,12 @@
         <activity
             android:name=".Personal_Info"
             android:exported="false" />
-
         <activity
             android:name=".Confirmation"
             android:exported="false" />
-
         <activity
             android:name=".Preview_Info"
             android:exported="false" />
-
         <activity
             android:name=".Room_Info"
             android:exported="false" />

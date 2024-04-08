@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public ViewPager2 getViewPager() {
         return viewPager2;
     }

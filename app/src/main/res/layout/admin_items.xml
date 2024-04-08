@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:layout_marginStart="16dp"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textNameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textName"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@id/textName"
+        android:text="Name Detail"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/textHouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textName"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:text="House:"
+        android:layout_marginStart="16dp"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <!-- TextView beside "House" TextView -->
+    <TextView
+        android:id="@+id/textHouseDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textHouse"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/textHouse"
+        android:text="House Detail"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/textRooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textHouse"
+        android:layout_alignStart="@id/textHouse"
+        android:layout_marginTop="12dp"
+        android:text="Room:"
+        android:layout_marginStart="0dp"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/textRoomsDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textRooms"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/textRooms"
+        android:text="Additional Detail"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/textDecisionStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textRooms"
+        android:layout_alignStart="@id/textHouse"
+        android:layout_marginTop="16dp"
+        android:text="Decision Status:"
+        android:layout_marginStart="0dp"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/textDecisionStatusDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textDecisionStatus"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/textDecisionStatus"
+        android:text="Decision Status Detail"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <Button
+        android:id="@+id/buttonDecision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDecisionStatus"
+        android:layout_alignStart="@id/textDecisionStatus"
+        android:layout_marginStart="-7dp"
+        android:layout_marginTop="11dp"
+        android:text="Confirm" />
+
+    <Button
+        android:id="@+id/pendingbuttonDecision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/buttonDecision"
+        android:layout_marginStart="38dp"
+        android:layout_toEndOf="@id/buttonDecision"
+        android:text="Pending" />
+
+    <View
+        android:id="@+id/horizontalLine"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/pendingbuttonDecision"
+        android:background="#000000"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5" />
+</RelativeLayout>

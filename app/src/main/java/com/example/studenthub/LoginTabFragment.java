@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+
+import com.example.admin.AdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,7 +41,7 @@ public class LoginTabFragment extends Fragment {
         emailEditText = view.findViewById(R.id.login_email);
         passwordEditText = view.findViewById(R.id.login_password);
         loginButton = view.findViewById(R.id.login_button);
-        forgotPasswordET=view.findViewById(R.id.forgot_password);
+        forgotPasswordET = view.findViewById(R.id.forgot_password);
 
         forgotPasswordET.setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
@@ -67,14 +69,24 @@ public class LoginTabFragment extends Fragment {
                     .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                            try {
+                                if (task.isSuccessful()) {
+                                    if (email.equalsIgnoreCase("sivatejaa.thangala@gmail.com")) {
+                                        Intent intent = new Intent(getActivity(), AdminActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(getActivity(), Accommodation_List.class);
-                                startActivity(intent);
-                            }  else {
-                                Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                Log.e("LoginActivity", "Authentication failed: " + task.getException().getMessage());
+                                        Intent intent = new Intent(getActivity(), Accommodation_List.class);
+                                        startActivity(intent);
+                                    }
+
+                                } else {
+                                    Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Log.e("LoginActivity", "Authentication failed: " + task.getException().getMessage());
+                                }
+                            } catch (Exception e) {
+                                e.getMessage();
                             }
                         }
                     });
