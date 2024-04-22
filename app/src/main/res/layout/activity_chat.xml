@@ -13,6 +13,17 @@
         android:gravity="center"
         android:layout_marginTop="16dp" />
 
+    <Button
+        android:id="@+id/backhome_button_chat"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+
+        android:layout_marginBottom="148dp"
+
+        android:text="Back to Home Page"
+        android:textSize="10sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="match_parent"

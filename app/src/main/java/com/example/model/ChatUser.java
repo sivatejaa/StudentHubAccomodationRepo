@@ -3,6 +3,17 @@ package com.example.model;
 public class ChatUser {
     String mail, name, password, uId;
 
+    public ChatUser() {
+
+    }
+
+    public ChatUser(String mail, String name, String password, String uId) {
+        this.mail = mail;
+        this.name = name;
+        this.password = password;
+        this.uId = uId;
+    }
+
     public String getMail() {
         return mail;
     }

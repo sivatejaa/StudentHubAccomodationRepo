@@ -56,4 +56,14 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:padding="16dp" />
 
+    <Button
+        android:id="@+id/backhome_button_history"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="148dp"
+        android:text="Back to Home Page"
+        android:textSize="18sp"
+        app:cornerRadius="30dp" />
+
 </LinearLayout>

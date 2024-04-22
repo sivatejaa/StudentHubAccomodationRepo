@@ -39,10 +39,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
     @Override
     public void onBindViewHolder(@NonNull AdminViewHolder holder, int position) {
         AdminModel house = houseList.get(position);
-        holder.textName.setText(house.getName());
-        holder.textHouse.setText(house.getHouse());
-        holder.textRooms.setText(house.getRooms());
-     //   holder.buttonDecision.setText(house.getDecisionStatusDetail());
+
         holder.textNameDetail.setText(house.getNameDetail());
         holder.textHouseDetail.setText(house.getHouseDetail());
         holder.textRoomsDetail.setText(house.getRoomsDetail());
@@ -84,13 +81,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
     }
 
     public static class AdminViewHolder extends RecyclerView.ViewHolder {
-        TextView textName, textHouse, textRooms, textDecisionStatus,textNameDetail,textHouseDetail,textRoomsDetail,buttonDecision,pendingbuttonDecision,textDecisionStatusDetail;
+        TextView  textNameDetail,textHouseDetail,textRoomsDetail,buttonDecision,pendingbuttonDecision,textDecisionStatusDetail;
 
         public AdminViewHolder(@NonNull View itemView) {
             super(itemView);
-            textName = itemView.findViewById(R.id.textName);
-            textHouse = itemView.findViewById(R.id.textHouse);
-            textRooms = itemView.findViewById(R.id.textRooms);
+
 
             textNameDetail = itemView.findViewById(R.id.textNameDetail);
             textHouseDetail = itemView.findViewById(R.id.textHouseDetail);
@@ -109,19 +104,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
 
         String decisionStatus = status;
 
-        nodeRef.child("decisionStatus").setValue(decisionStatus)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                       // Toast.makeText(holder.itemView.getContext(), "Decision status updated successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                      //  Toast.makeText(holder.itemView.getContext(), "Failed to update decision status: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        nodeRef.child("decisionStatus").setValue(decisionStatus);
+
     }
 
 
@@ -130,8 +114,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
         AdminModel house = houseList.get(position);
         house.setDecisionStatusDetail(status);
         String confirmationNumber = house.getConfirmationNumber();
-      //  FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-      //  String userId = currentUser.getUid();
+
         DatabaseReference nodeRef = FirebaseDatabase.getInstance().getReference()
                 .child("History")
                 .child(house.getUidNo())
@@ -139,19 +122,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
                 .child(confirmationNumber);
 
         String decisionStatus = status;
+        nodeRef.child("status").setValue(decisionStatus);
 
-        nodeRef.child("status").setValue(decisionStatus)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Decision status updated successfully
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle failure to update decision status
-                    }
-                });
     }
 }

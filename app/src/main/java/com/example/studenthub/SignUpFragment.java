@@ -28,7 +28,6 @@ public class SignUpFragment extends Fragment {
     private Button signUpButton;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference usersDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +51,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void signUpUser() {
-        final String username = sidEditText.getText().toString().trim();
+
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 

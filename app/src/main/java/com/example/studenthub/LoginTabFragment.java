@@ -71,12 +71,11 @@ public class LoginTabFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             try {
                                 if (task.isSuccessful()) {
-                                    if (email.equalsIgnoreCase("sivatejaa.thangala@gmail.com")) {
+                                    if (email.equalsIgnoreCase("sivatejaa.thangala@gmail.com") || email.contains("admin")) {
                                         Intent intent = new Intent(getActivity(), AdminActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
-
                                         Intent intent = new Intent(getActivity(), Accommodation_List.class);
                                         startActivity(intent);
                                     }
@@ -92,7 +91,6 @@ public class LoginTabFragment extends Fragment {
                     });
         }
     }
-
     public ViewPager2 getParentViewPager() {
         if (getActivity() != null && getActivity() instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) getActivity();

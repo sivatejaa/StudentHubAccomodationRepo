@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.model.ChatUser;
+import com.example.model.User;
 import com.example.studenthub.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,34 +43,44 @@ public class UsersActivity extends AppCompatActivity {
         fdatabase = FirebaseDatabase.getInstance();
         //  auth= FirebaseAuth.getInstance();
 
-        DatabaseReference reference = fdatabase.getReference().child("Users");
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(uid.equalsIgnoreCase("3Coa9p2X5sVfxaANU09M8eZEBrE2")){
+            DatabaseReference reference = fdatabase.getReference().child("Users");
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    ChatUser user = dataSnapshot.getValue(ChatUser.class);
-                    userList.add(user);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    userList.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        ChatUser user = dataSnapshot.getValue(ChatUser.class);
+                        if(!(user.getMail().equalsIgnoreCase("sivatejaa.thangala@gmail.com"))){
+                            userList.add(user);
+                        }
+
+                    }
+                    userAdapter.notifyDataSetChanged();
                 }
-                userAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }else{
+            ChatUser user2=new ChatUser("sivatejaa.thangala@gmail.com","Admin","9963411997","3Coa9p2X5sVfxaANU09M8eZEBrE2");
+            userList.add(user2);
+          //  userAdapter.notifyDataSetChanged();
+        }
 
 
-        // Add sample users (You'll likely fetch users from a database or server)
-       /* userList.add(new ChatUser("User 1"));
-        userList.add(new ChatUser("User 2"));
-        userList.add(new ChatUser("User 3"));*/
-        // Add more users as needed
-
-        // Initialize and set up RecyclerView and adapter
         userAdapter = new UserAdapter(this, userList);
         recyclerViewUsers.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewUsers.setAdapter(userAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Your custom back functionality here
+        super.onBackPressed();
     }
 }

@@ -20,8 +20,18 @@ public class Accommodation implements Parcelable {
     private String selectedRoomType;
     private String numberOfRooms;
     private String checkinDate;
+
+    public String getLeaseTerm() {
+        return leaseTerm;
+    }
+
+    public void setLeaseTerm(String leaseTerm) {
+        this.leaseTerm = leaseTerm;
+    }
+
     private String checkoutDate;
 
+    private String leaseTerm;
 
     public String getUidNo() {
         return uidNo;

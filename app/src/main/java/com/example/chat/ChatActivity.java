@@ -2,10 +2,15 @@ package com.example.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.admin.AdminActivity;
+import com.example.history.HistoryActivity;
+import com.example.studenthub.Accommodation_List;
 import com.example.studenthub.R;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -53,12 +58,27 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-       // getSupportActionBar().hide();
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+        Button backhome_button = findViewById(R.id.backhome_button_chat);
 
+        backhome_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                if(uid.equalsIgnoreCase("3Coa9p2X5sVfxaANU09M8eZEBrE2")){
+                    Intent intent = new Intent(ChatActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Intent intent = new Intent(ChatActivity.this, Accommodation_List.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        });
         reciverName = getIntent().getStringExtra("userName");
-      //  reciverimg = getIntent().getStringExtra("reciverImg");
         reciverUid = getIntent().getStringExtra("uId");
 
         messagesArrayList = new ArrayList<>();
@@ -66,7 +86,6 @@ public class ChatActivity extends AppCompatActivity {
         sendbtn = findViewById(R.id.sendButton);
         textmsg = findViewById(R.id.messageEditText);
         reciverNName = findViewById(R.id.receiverTextView);
-      //  profile = findViewById(R.id.profileimgg);
         recyclerView = findViewById(R.id.recyclerViewChat);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -75,7 +94,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setAdapter(mMessageAdapter);
 
 
-       // Picasso.get().load(reciverimg).into(profile);
         reciverNName.setText(""+reciverName);
 
         SenderUID =  firebaseAuth.getUid();
@@ -128,12 +146,7 @@ public class ChatActivity extends AppCompatActivity {
                                 database.getReference().child("chats")
                                         .child(reciverRoom)
                                         .child("messages")
-                                        .push().setValue(messagess).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                            }
-                                        });
+                                        .push().setValue(messagess);
                             }
                         });
             }

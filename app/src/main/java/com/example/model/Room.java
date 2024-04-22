@@ -10,6 +10,8 @@ public class Room implements Parcelable {
     private String checkinDate;
     private String checkoutDate;
 
+
+
     public Room(String selectedRoomType, String numberOfRooms, String checkinDate, String checkoutDate) {
         this.selectedRoomType = selectedRoomType;
         this.numberOfRooms = numberOfRooms;

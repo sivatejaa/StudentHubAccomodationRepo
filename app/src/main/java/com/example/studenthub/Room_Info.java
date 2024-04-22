@@ -41,7 +41,7 @@ public class Room_Info extends AppCompatActivity {
     private EditText checkoutDateEditText;
     private Calendar checkinCalendar;
     private Calendar checkoutCalendar;
-    private SimpleDateFormat dateFormat; //sivatejaa.thangala@gmail.com
+    private SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class Room_Info extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
         Spinner roomTypeSpinner = findViewById(R.id.spinnerType);
-        Spinner lease_term = findViewById(R.id.spinnerType1);
+        Spinner lease_termSprinner = findViewById(R.id.spinnerType1);
         String[] types = getResources().getStringArray(R.array.type);
         CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,12 +116,13 @@ public class Room_Info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String selectedRoomType = roomTypeSpinner.getSelectedItem().toString();
-                String leaseTerm = lease_term.getSelectedItem().toString().trim();
+                String leaseTerm = lease_termSprinner.getSelectedItem().toString().trim();
                 String checkinDate = checkinDateEditText.getText().toString().trim();
                 String checkoutDate = checkoutDateEditText.getText().toString().trim();
 
-                if (selectedRoomType.equals("Select") || checkinDate.isEmpty() || checkoutDate.isEmpty()) {
-                    if (selectedRoomType.equals("Select")) {
+
+                if (selectedRoomType.equals("Select Apartment type") || checkinDate.isEmpty() || checkoutDate.isEmpty()) {
+                    if (selectedRoomType.equals("Select Apartment type")) {
                         showErrorDialog("Please select a room type.");
                     } else {
                         showErrorDialog("Please enter all the fields.");
@@ -131,18 +132,19 @@ public class Room_Info extends AppCompatActivity {
 
                     hotel.setSelectedRoomType(selectedRoomType);
                     hotel.setCheckinDate(checkinDate);
-                    // hotel.setNumberOfRooms(numberOfRooms);
+                     hotel.setLeaseTerm(leaseTerm);
                     hotel.setCheckoutDate(checkoutDate);
 
                     Room room = new Room(selectedRoomType, leaseTerm, checkinDate, checkoutDate);
-                    double roomPrice = 100.0;
-                    //calculatePrice(hotel);
-                    hotel.setPrice(roomPrice);
+                   // double roomPrice = 100.0;
+                   // hotel.setPrice(roomPrice);
+                    calculatePrice(hotel);
+                    //hotel.setPrice(roomPrice);
 
                     intent.putExtra("hotelObject", hotel);
                     intent.putExtra("personalInfo", personalInfo);
                     intent.putExtra("room", room);
-                    intent.putExtra("roomPrice", roomPrice);
+                    intent.putExtra("roomPrice", hotel.getPrice());
 
                     startActivity(intent);
                 }
@@ -183,24 +185,21 @@ public class Room_Info extends AppCompatActivity {
     }
 
     private double calculatePrice(Accommodation hotel) {
-        // Your existing calculatePrice code...
+
         String roomType = hotel.getSelectedRoomType();
         String checkInDate = hotel.getCheckinDate();
         String checkoutDate = hotel.getCheckoutDate();
-        int noOfRooms = Integer.parseInt(hotel.getNumberOfRooms());
 
         double roomPrice = 0.0;
-        if (roomType.equalsIgnoreCase("Single BedRoom")) {
+        if (roomType.contains("1 Bed")) {
             roomPrice = 100.0;
-        } else if (roomType.equalsIgnoreCase("Double BedRoom")) {
+        } else if (roomType.contains("2 Bed")) {
             roomPrice = 200.0;
-        } else if (roomType.equalsIgnoreCase("Deluxe BedRoom")) {
+        } else if (roomType.contains("3 Bed")) {
             roomPrice = 300.0;
-        } else if (roomType.equalsIgnoreCase("Super Deluxe BedRoom")) {
-            roomPrice = 400.0;
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        /*SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 
         long differenceInDays = 0;
         try {
@@ -214,7 +213,19 @@ public class Room_Info extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        roomPrice = (differenceInDays * roomPrice) * noOfRooms;
+        roomPrice = (differenceInDays * roomPrice) * noOfRooms;*/
+
+        String leaseTerm=hotel.getLeaseTerm();
+        if (leaseTerm.equalsIgnoreCase("1 Year")) {
+            roomPrice=roomPrice-(roomPrice*0.1);
+        } else if (leaseTerm.equalsIgnoreCase("2 Years")) {
+            roomPrice=roomPrice-(roomPrice*0.2);
+        }
+        else if (leaseTerm.equalsIgnoreCase("3 Years")) {
+            roomPrice=roomPrice-(roomPrice*0.3);
+        }
+
+        hotel.setPrice(roomPrice);
 
         return roomPrice;
     }

@@ -2,7 +2,7 @@
     <string name="app_name">Student Hub</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="type">
-        <item>Select Apartment type </item>
+        <item>Select Apartment type</item>
         <item>Apt 1 (1 Bed)</item>
         <item>Apt 2 (3 Bed)</item>
         <item>Apt 3 (2 Bed)</item>

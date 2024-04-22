@@ -38,13 +38,14 @@ public class AdminActivity extends AppCompatActivity {
     private AdminAdapter adapter;
     private List<AdminModel> houseList;
     private DatabaseReference bookingsDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        TextView chatView=findViewById(R.id.chatAdmin);
-      //  Button buttonDecision = findViewById(R.id.buttonDecision);
+        TextView chatView = findViewById(R.id.chatAdmin);
+        //  Button buttonDecision = findViewById(R.id.buttonDecision);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -72,48 +73,34 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
-    private void fetchDataFromFirebase(){
-        String str= bookingsDatabase.toString();
+    private void fetchDataFromFirebase() {
+
         Log.d("Firebase", "Database Reference: " + bookingsDatabase.toString());
         bookingsDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 houseList.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     AdminModel adminModel = new AdminModel();
-                    // Accommodation accommodation = snapshot.getValue(Accommodation.class);
                     if (snapshot != null) {
                         String nameDetail = snapshot.child("personalInfo").child("name").getValue(String.class);
-                        String houseDetail = snapshot.child("description").getValue(String.class);
-                         String confirmationNumber = snapshot.child("confirmationNumber").getValue(String.class);
-                         if(confirmationNumber.equalsIgnoreCase("20240404922")){
-                             String uidNo2=null;
-                        }
-                         String uidNo=null;
-                        String decisionStatus = null;
-                        DataSnapshot decisionStatusSnapshot = snapshot.child("decisionStatus");
-                        DataSnapshot uidNoSnapshot = snapshot.child("uidNo");
-//20240404922
-                        if (decisionStatusSnapshot.exists()) {
-                            decisionStatus = decisionStatusSnapshot.getValue(String.class);
+                        String houseDetail = snapshot.child("name").getValue(String.class);
+                        String confirmationNumber = snapshot.child("confirmationNumber").getValue(String.class);
 
-                            adminModel.setDecisionStatusDetail(decisionStatus);
+                        String roomType=snapshot.child("roomInfo").child("selectedRoomType").getValue(String.class);
 
-                        } if(uidNoSnapshot.exists()){
-                            uidNo=uidNoSnapshot.getValue(String.class);
-                            adminModel.setUidNo(uidNo);
 
-                        }else {
-                            Log.d("AdminActivity", "Decision status is null for confirmation number: " );
-                        }
+                        String uidNo = snapshot.child("uidNo").getValue(String.class);
+                        String decisionStatus = snapshot.child("decisionStatus").getValue(String.class);
+                        adminModel.setDecisionStatusDetail(decisionStatus);
 
+                        adminModel.setUidNo(uidNo);
                         adminModel.setNameDetail(nameDetail);
                         adminModel.setHouseDetail(houseDetail);
                         adminModel.setConfirmationNumber(confirmationNumber);
-                        adminModel.setRoomsDetail(confirmationNumber);
+                        adminModel.setRoomsDetail(roomType);
 
-                        //snapshot.child("decisionStatus").getValue(String.class)
                         houseList.add(adminModel);
 
                     }
@@ -128,6 +115,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
     private void logoutUser() {
 
         FirebaseAuth.getInstance().signOut();

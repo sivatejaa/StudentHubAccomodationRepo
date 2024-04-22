@@ -105,38 +105,14 @@ public class Preview_Info extends AppCompatActivity {
 
         //2. Making unavailable in the dropdown in the RoomPage
         String confirmationNumber = hotel.getConfirmationNumber();
-        DatabaseReference bookingRef = bookingsDatabase.child(confirmationNumber);
+
         DatabaseReference apartmentsRef = FirebaseDatabase.getInstance().getReference("Accommodation/apartments");
-        apartmentsRef.child(hotel.getRoomInfo().getSelectedRoomType()).setValue("Not available").addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("TAG", "Value updated successfully");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("TAG", "Failed to update value", e);
-            }
-        });
+        apartmentsRef.child(hotel.getRoomInfo().getSelectedRoomType()).setValue("Not available");
 
         hotel.setDecisionStatus("Pending");
         hotel.setUidNo(FirebaseAuth.getInstance().getCurrentUser().getUid());
         // Set the values for the booking under the specified node
-        bookingRef.setValue(hotel)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Firebase", "Data inserted successfully with confirmation number: " + confirmationNumber);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firebase", "Error inserting data: " + e.getMessage());
-                    }
-                });
-
-
+        DatabaseReference bookingRef = bookingsDatabase.child(confirmationNumber);
         bookingRef.setValue(hotel);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -147,21 +123,10 @@ public class Preview_Info extends AppCompatActivity {
         //  String bookingId2 = userRef.child("bookings").push().getKey();
         BookingDetails bookingDetails = new BookingDetails();
         bookingDetails.setConfirmationNumber(hotel.getConfirmationNumber());
-        bookingDetails.setAptInfo(hotel.getDescription());
+        bookingDetails.setAptInfo(hotel.getName());
         bookingDetails.setStatus(hotel.getDecisionStatus());
-        userRef.child("bookings").child(hotel.getConfirmationNumber()).setValue(bookingDetails)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Booking details saved successfully
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle failure to save booking details
-                    }
-                });
+        userRef.child("bookings").child(hotel.getConfirmationNumber()).setValue(bookingDetails);
+
     }
 
     private void logoutUser() {
